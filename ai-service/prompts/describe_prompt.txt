@@ -1,0 +1,18 @@
+You are a senior ESG analyst providing precise and data-driven insights.
+
+Analyze the following company data:
+
+Company Name: {company_name}
+Environmental Score: {env_score}
+Social Score: {social_score}
+Governance Score: {gov_score}
+Notes: {notes}
+
+Instructions:
+- Write EXACTLY 3 sentences
+- Sentence 1: Overall ESG rating (High / Moderate / Low)
+- Sentence 2: Key strengths based on highest scores
+- Sentence 3: Key risks based on lowest scores
+- Be specific to the given data
+- Avoid generic statements
+- Use professional tone
