@@ -10,43 +10,22 @@ import java.util.Map;
 public class AiServiceClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
-
     private static final String BASE_URL = "http://localhost:5000";
 
-    public String getDescription(Map<String, Object> request) {
+    public Object generateReport(Map<String, Object> request) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request, headers);
 
-            ResponseEntity<Map> response = restTemplate.postForEntity(
-                    BASE_URL + "/describe",
+            ResponseEntity<Object> response = restTemplate.postForEntity(
+                    BASE_URL + "/generate-report",
                     entity,
-                    Map.class
+                    Object.class
             );
 
-            return response.getBody().get("summary").toString();
-
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Object getRecommendations(Map<String, Object> request) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request, headers);
-
-            ResponseEntity<Map> response = restTemplate.postForEntity(
-                    BASE_URL + "/recommend",
-                    entity,
-                    Map.class
-            );
-
-            return response.getBody().get("recommendations");
+            return response.getBody();
 
         } catch (Exception e) {
             return null;

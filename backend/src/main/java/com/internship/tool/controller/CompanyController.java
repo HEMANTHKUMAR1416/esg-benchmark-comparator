@@ -16,4 +16,10 @@ public class CompanyController {
     public Company createCompany(@RequestBody Company company) {
         return companyService.createCompany(company);
     }
+
+    // ✅ ADD INSIDE CLASS (NOT outside)
+    @PostMapping("/report")
+    public Object generateReport(@RequestBody Company company) {
+        return companyService.generateReport(company);
+    }
 }
