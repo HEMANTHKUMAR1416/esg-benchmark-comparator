@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.groq_client import call_groq
+from services.groq_client import generate_ai_response
 from datetime import datetime
 
 describe_bp = Blueprint("describe", __name__)
@@ -12,7 +12,7 @@ def describe():
     prompt = f"Describe ESG performance of {data['company_name']}"
 
     # Call AI
-    ai_response = call_groq(prompt)
+    ai_response = generate_ai_response(prompt)
 
     return jsonify({
         "generated_at": datetime.utcnow().isoformat(),
