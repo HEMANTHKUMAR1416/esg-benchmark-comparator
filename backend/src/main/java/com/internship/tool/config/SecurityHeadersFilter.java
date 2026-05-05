@@ -15,16 +15,21 @@ public class SecurityHeadersFilter implements Filter {
 
         HttpServletResponse res = (HttpServletResponse) response;
 
-        // 🔐 Security Headers
         res.setHeader("X-Content-Type-Options", "nosniff");
         res.setHeader("X-Frame-Options", "DENY");
         res.setHeader("X-XSS-Protection", "1; mode=block");
-        res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-        res.setHeader("Referrer-Policy", "no-referrer");
+        res.setHeader("Cache-Control", "no-store");
 
-        // 🔥 CSP (basic safe policy)
         res.setHeader("Content-Security-Policy",
-                "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;");
+                "default-src 'self'; " +
+                "script-src 'self'; " +
+                "style-src 'self' 'unsafe-inline'; " +
+                "img-src 'self' data:; " +
+                "font-src 'self'; " +
+                "connect-src 'self'; " +
+                "frame-ancestors 'none'; " +
+                "base-uri 'self'; " +
+                "form-action 'self';");
 
         chain.doFilter(request, response);
     }

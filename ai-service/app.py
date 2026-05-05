@@ -1,7 +1,9 @@
 from flask import Flask
-
+from services.model_loader import get_model
 app = Flask(__name__)   # ✅ FIRST create app
-
+# 🔥 preload model at startup
+model = get_model()
+print("✅ Sentence Transformer loaded at startup")
 # import after app creation
 from routes.generate_report import report_bp
 from routes.describe import describe_bp

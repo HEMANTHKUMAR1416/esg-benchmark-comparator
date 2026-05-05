@@ -24,11 +24,10 @@ def recommend():
 
         return jsonify({
             "generated_at": datetime.utcnow().isoformat(),
-            "recommendations": ai_response["result"],
+            "result": ai_response["result"],
             "is_fallback": ai_response["is_fallback"],
             "response_time": ai_response["response_time"]
-        })
-
+})
     except Exception as e:
         return jsonify({
             "generated_at": datetime.utcnow().isoformat(),
