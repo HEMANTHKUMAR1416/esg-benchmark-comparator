@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from datetime import datetime
 from services.groq_client import call_groq
+from datetime import datetime
 
 describe_bp = Blueprint("describe", __name__)
 
@@ -8,21 +8,15 @@ describe_bp = Blueprint("describe", __name__)
 def describe():
     data = request.json
 
-    prompt = f"""
-    Analyze the ESG performance of the company:
+    # Simple prompt
+    prompt = f"Describe ESG performance of {data['company_name']}"
 
-    Company: {data.get("company_name")}
-    Environment Score: {data.get("env_score")}
-    Social Score: {data.get("social_score")}
-    Governance Score: {data.get("gov_score")}
-    Notes: {data.get("notes")}
-
-    Provide a concise summary.
-    """
-
-    result = call_groq(prompt)
+    # Call AI
+    ai_response = call_groq(prompt)
 
     return jsonify({
-        "summary": result,   # ✅ IMPORTANT FIX
-        "generated_at": datetime.utcnow().isoformat()
+        "generated_at": datetime.utcnow().isoformat(),
+        "data": ai_response["result"],
+        "is_fallback": ai_response["is_fallback"],
+        "response_time": ai_response["response_time"]
     })
