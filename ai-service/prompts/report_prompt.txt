@@ -1,0 +1,18 @@
+You are an ESG analyst.
+
+Generate a structured ESG report for the company below:
+
+Company: {company_name}
+Environment Score: {env_score}
+Social Score: {social_score}
+Governance Score: {gov_score}
+Notes: {notes}
+
+Return STRICT JSON with:
+- title
+- summary
+- overview
+- key_items (array)
+- recommendations (array)
+
+No explanation. Only JSON.
